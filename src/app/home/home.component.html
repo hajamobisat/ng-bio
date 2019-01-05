@@ -1,0 +1,61 @@
+<div class="container">
+<mat-form-field class="example-form-field">
+    <input matInput type="text" placeholder="Search" [(ngModel)]="searchKey" autocomplete="off" (keyup)="applyFilter()">
+    <button *ngIf="searchKey" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </mat-form-field>
+  <button mat-raised-button (click)="downloadPDF()">Export to PDF</button>
+  <button mat-raised-button (click)="downloadExcel()">Export to Excel</button>
+
+</div>
+
+<div class="mat-elevation-z8 container" #pdfData>
+  <mat-table [dataSource]="listData" matSort >
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.id |json}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userid">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>User ID</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.userid |json}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checktime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Check Time</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.checktime |json}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="serialno">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>DeviceID</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.serialno |json}}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="loading">  
+                <mat-footer-cell *matFooterCellDef colspan="4">
+                  Loading Data.....
+                </mat-footer-cell>
+          </ng-container>
+        
+          <ng-container matColumnDef="noData">  
+              <mat-footer-cell *matFooterCellDef colspan="4">
+                No Data.....
+              </mat-footer-cell>
+        </ng-container>
+      
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData!=null && listData.length==0)}"></mat-footer-row>
+   
+
+  </mat-table>
+
+  <mat-paginator   [pageSizeOptions]="[5,10,25,50]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+ 
+</div>
+<div>
+  <!-- <button mat-raised-button (click)="downloadPDF()">Export to PDF</button> -->
+</div>

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand"
+      >TA System - Arabia Holdings</a
+    >
+    <button
+      class="navbar-toggler"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto">
+
+          <div *ngIf="auth.user$ | async as user; then showMenu  else anonymousUser"></div>
+
+          <ng-template #showMenu>
+              <li class="nav-item" *ngIf="auth.user$|async">
+                  <a mat-button routerLink="/home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a mat-button routerLink="/setting" class="nav-link">Setting</a>
+                  </li>   
+                  <li class="nav-item" >
+                      <a mat-button (click)="logout()" routerLink="" class="nav-link">Logout {{(auth.user$|async)?.email}}</a>
+                    </li> 
+                </ng-template>     
+       
+              
+
+        <ng-template #anonymousUser>
+          <li class="nav-item ">
+            <a mat-button (click)="login()" class="nav-link">Login</a>
+          </li>
+        </ng-template>
+
+     
+
+      
+       
+    
+      </ul>
+    </div>
+  </div>
+</nav>
