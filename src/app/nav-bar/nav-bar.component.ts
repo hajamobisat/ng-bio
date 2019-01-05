@@ -12,7 +12,8 @@ export class NavBarComponent implements OnInit {
 appUser: AppUser;
 
   constructor(public auth:AuthService, private userSerivce: UserService) {
-// this.appUser.subscribe = this.userService.  
+
+
    }
 
   ngOnInit() {
