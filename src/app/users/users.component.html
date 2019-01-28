@@ -1,0 +1,33 @@
+<div class="d-flex container">
+    <mat-card class="example-card">
+
+        <form class=".example-form" [formGroup]="userService.userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <h3>Create User</h3>
+            <input type="hidden" formControlName="$key">
+
+            <section class="example-section">
+                <mat-form-field class="example-section">
+                    <input class="example-margin" formControlName="email" matInput placeholder="Email*">
+                    <mat-error *ngIf="userService.userForm.controls['email'].errors?.required">Email is required</mat-error>
+                    <mat-error *ngIf="userService.userForm.controls['email'].errors?.email">Invalid Email</mat-error>
+
+                </mat-form-field>
+            </section>
+
+            <section class="example-section">
+                <mat-checkbox class="example-margin" formControlName="isActive">Account Active</mat-checkbox>
+            </section>
+
+            <section formGroupName="roles" class="example-section">
+                <mat-checkbox formControlName="isUser" class="example-margin" value="true">User</mat-checkbox>
+                <mat-checkbox formControlName="isAdmin" class="example-margin" value="true">Admin</mat-checkbox>
+            </section>
+
+            <button  mat-raised-button color="primary" type="submit" [disabled]="userService.userForm.invalid">Save Changes</button>
+            <button  mat-raised-button color="warn" (click)="onClear()"  >Clear</button>
+
+        </form>
+
+    </mat-card>
+
+</div>

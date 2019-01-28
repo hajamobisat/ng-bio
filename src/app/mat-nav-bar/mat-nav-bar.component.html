@@ -1,0 +1,17 @@
+<mat-toolbar class="mat-elevation-z8" color="primary">
+  <mat-toolbar-row>
+    <span  routerLink="/">TA System - Arabia Holdings</span>
+    <span class="example-spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu">Setting</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/users">Manage Users</button>
+      <button mat-menu-item>Manage Devices</button>
+      <button mat-menu-item>Manage Locations</button>
+
+    </mat-menu>
+
+    <mat-icon class="example-icon">favorite</mat-icon>
+    <mat-icon class="example-icon">delete</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>

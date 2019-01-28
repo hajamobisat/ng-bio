@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h1>User Form</h1>
+      <form #userForm="ngForm" autocomplete="off" (submit)="onSubmit(userForm)">
+        <input type="hidden" name="id" #id="ngModel" [(ngModel)]="nomatUserService.userFormData.id">
+
+        <div class="form-group">
+          <input required [class.is-invalid]="email.invalid && email.touched" name="email" #email="ngModel" [(ngModel)]="nomatUserService.userFormData.email"
+            placeholder="Email" class="form-control">
+          <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small>
+        </div>
+
+
+        <div class="form-group">
+          <!-- <input name="isActive" #isActive="ngModel" [(ngModel)]="nomatUserService.userFormData.isActive" placeholder="Is this user Active"
+            class="form-control"> -->
+          <mat-checkbox name="isActive" #isActive="ngModel" [(ngModel)]="nomatUserService.userFormData.isActive">is Active</mat-checkbox>
+
+        </div>
+
+        <div class="form-group">
+          <!-- <input name="isUser" #isUser="ngModel" [(ngModel)]="nomatUserService.userFormData.roles.isUser" placeholder="User rights is true"
+            class="form-control"> -->
+          <mat-checkbox name="isUser" #isUser="ngModel" [(ngModel)]="nomatUserService.userFormData.roles.isUser">Enable User Rights </mat-checkbox>
+
+        </div>
+
+
+
+        <div class="form-group">
+          <!-- <input name="isAdmin" #isAdmin="ngModel" [(ngModel)]="nomatUserService.userFormData.roles.isAdmin" placeholder="Admin rights is true"
+            class="form-control"> -->
+
+          <mat-checkbox name="isAdmin" #isAdmin="ngModel" [(ngModel)]="nomatUserService.userFormData.roles.isAdmin">Enable Admin Rights </mat-checkbox>
+
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="userForm.invalid" class="btn btn-block btn-primary" type="submit">SAVE</button>
+        </div>
+      </form>
+      <button class="btn btn-block btn-primary" (click)="onClear()">CLEAR</button>
+
+    </div>
+
+
+    <div class="col-md-7">
+      <table class="table table-hover">
+        <thead>
+          <th>Email</th>
+          <th></th>
+          <th></th>
+          <th>Delete</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of list">
+            <td (click)="onSelect(user)">
+              {{user.email}}
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+              <a class="btn btn-danger" (click)="onDelete(user.id)">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

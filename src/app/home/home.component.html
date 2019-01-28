@@ -13,33 +13,38 @@
 
 <div class="mat-elevation-z8 container" #pdfData>
   <mat-table [dataSource]="listData" matSort >
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.id |json}}</mat-cell>
+    <ng-container matColumnDef="userid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> USER ID</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.userid |json}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="userid">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>User ID</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.userid |json}}</mat-cell>
+    <ng-container matColumnDef="checkdate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.checkdate |json}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="checkintime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CHECK IN TIME</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.checkintime |json}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="checktime">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Check Time</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.checktime |json}}</mat-cell>
+      <ng-container matColumnDef="checkouttime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>CHECK OUT TIME</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.checkouttime |json}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="serialno">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>DeviceID</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>DEVICE NO.</mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.serialno |json}}</mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="loading">  
-                <mat-footer-cell *matFooterCellDef colspan="4">
+                <mat-footer-cell *matFooterCellDef colspan="5">
                   Loading Data.....
                 </mat-footer-cell>
           </ng-container>
         
           <ng-container matColumnDef="noData">  
-              <mat-footer-cell *matFooterCellDef colspan="4">
+              <mat-footer-cell *matFooterCellDef colspan="5">
                 No Data.....
               </mat-footer-cell>
         </ng-container>
@@ -55,7 +60,4 @@
 
   <mat-paginator   [pageSizeOptions]="[5,10,25,50]" [pageSize]="5" showFirstLastButtons></mat-paginator>
  
-</div>
-<div>
-  <!-- <button mat-raised-button (click)="downloadPDF()">Export to PDF</button> -->
 </div>

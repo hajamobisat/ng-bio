@@ -1,12 +1,13 @@
 export interface Roles{
-    subscriber?: boolean;
-    admin?: boolean;
+    isUser?: boolean;
+    isAdmin?: boolean;
     
 } 
 
 export interface AppUser {
-    uid: string;
+    $key: string;
     email: string;
+    isActive: boolean;
     roles?: Roles;
 
 }

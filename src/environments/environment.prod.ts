@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase:{
-    apiKey: "AIzaSyBlV3ID6jPMt4ZJ0AFJ4BaIM8WfjZoVMI4",
-    authDomain: "biometric-6c38a.firebaseapp.com",
-    databaseURL: "https://biometric-6c38a.firebaseio.com",
-    projectId: "biometric-6c38a",
+    apiKey: "AIzaSyDUapIzn9un-qy5qdf649EXp3Wdwo0Fxxo",
+    authDomain: "ng-bio.firebaseapp.com",
+    databaseURL: "https://ng-bio.firebaseio.com",
+    projectId: "ng-bio",
     storageBucket: "",
-    messagingSenderId: "634432302124"
+    messagingSenderId: "393425171503"
   }
 };

@@ -17,7 +17,7 @@ export class AdminAuthGuardService implements CanActivate {
   canActivate(): Observable<boolean>{
     return this.userService.firestoreUser$.pipe(
       take(1),
-      map(user => user && user.roles.admin ? true : false),
+      map(user => user && user.roles.isAdmin ? true : false),
       tap(isAdmin => {
         if (!isAdmin) console.error('Access denied - Admins only');
       }));

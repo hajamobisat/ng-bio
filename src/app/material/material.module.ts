@@ -4,9 +4,11 @@ import * as Material from '@angular/material';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,
+    Material.MatCheckboxModule,
     Material.MatToolbarModule,
     Material.MatFormFieldModule,
     Material.MatIconModule,
@@ -23,11 +25,16 @@ import * as Material from '@angular/material';
     Material.MatIconModule,
     Material.MatPaginatorModule,
     Material.MatSortModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatRadioModule,
+    Material.MatCheckboxModule,
+    Material.MatCardModule,
+    Material.MatDividerModule
 
   ],
 
   exports:[
+    Material.MatCheckboxModule,
     Material.MatToolbarModule,
     Material.MatFormFieldModule,
     Material.MatIconModule,
@@ -44,7 +51,11 @@ import * as Material from '@angular/material';
     Material.MatIconModule,
     Material.MatPaginatorModule,
     Material.MatSortModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatRadioModule,
+    Material.MatCheckboxModule,
+    Material.MatCardModule,
+    Material.MatDividerModule
   ],
 
   declarations: []
