@@ -1,63 +1,107 @@
-<div class="container">
-<mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Search" [(ngModel)]="searchKey" autocomplete="off" (keyup)="applyFilter()">
-    <button *ngIf="searchKey" mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchClear()">
-      <mat-icon>close</mat-icon>
+<div [class.isPrinting]="isPrinting">
+
+  <mat-toolbar color="secondary">
+    <mat-form-field floatLabel="never" class="example-form-field">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="searchKey" autocomplete="off"
+        (keyup)="applyFilter()">
+      <button *ngIf="searchKey" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="searchClear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <span class="example-spacer"></span>
+    <mat-form-field floatLabel="never">
+      <mat-select placeholder="Select Company" [(ngModel)]="toppings"
+        (selectionChange)="onLocationChange($event.value)">
+        <mat-option>All</mat-option>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping.serialno">{{topping.location}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <span class="example-spacer"></span>
+    <button mat-mini-fab matTooltip="Export to Excel" (click)="downloadExcel()">
+      <mat-icon>
+        <i class="material-icons">import_export</i>
+      </mat-icon>
     </button>
 
-  </mat-form-field>
-  <button mat-raised-button (click)="downloadPDF()">Export to PDF</button>
-  <button mat-raised-button (click)="downloadExcel()">Export to Excel</button>
+    <button mat-mini-fab matTooltip="Export PDF" (click)="downloadPDF()">
+      <mat-icon>
+        <i class="material-icons"> picture_as_pdf </i>
+      </mat-icon>
+    </button>
 
-</div>
+    <button mat-mini-fab matTooltip="Print" (click)="printDoc()">
+      <mat-icon>
+        <i class="material-icons">print</i>
+      </mat-icon>
+    </button>
 
-<div class="mat-elevation-z8 container" #pdfData>
-  <mat-table [dataSource]="listData" matSort >
-    <ng-container matColumnDef="userid">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> USER ID</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.userid |json}}</mat-cell>
-    </ng-container>
+  </mat-toolbar>
 
-    <ng-container matColumnDef="checkdate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.checkdate |json}}</mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="checkintime">
+  <div class="mat-elevation-z8 container mattable" #pdfData>
+    <mat-table [dataSource]="listData" matSort>
+      <ng-container matColumnDef="userid">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> USER ID</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.userid |json}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> USER NAME</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.name |json}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checkdate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.checkdate |json}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="checkintime">
         <mat-header-cell *matHeaderCellDef mat-sort-header>CHECK IN TIME</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.checkintime |json}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="checkouttime">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>CHECK OUT TIME</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{element.checkouttime |json}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="serialno">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>DEVICE NO.</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.serialno |json}}</mat-cell>
-          </ng-container>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>CHECK OUT TIME</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.checkouttime |json}}</mat-cell>
+      </ng-container>
 
-          <ng-container matColumnDef="loading">  
-                <mat-footer-cell *matFooterCellDef colspan="5">
-                  Loading Data.....
-                </mat-footer-cell>
-          </ng-container>
-        
-          <ng-container matColumnDef="noData">  
-              <mat-footer-cell *matFooterCellDef colspan="5">
-                No Data.....
-              </mat-footer-cell>
-        </ng-container>
-      
+      <ng-container matColumnDef="serialno">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>DEVICE NO.</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.serialno |json}}</mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
-    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
-    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData!=null && listData.length==0)}"></mat-footer-row>
-   
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>LOCATION</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.location |json}}</mat-cell>
+      </ng-container>
 
-  </mat-table>
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading Data.....
+        </mat-footer-cell>
+      </ng-container>
 
-  <mat-paginator   [pageSizeOptions]="[5,10,25,50]" [pageSize]="5" showFirstLastButtons></mat-paginator>
- 
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No Data.....
+        </mat-footer-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+      <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide': !(listData!=null && listData.length==0)}">
+      </mat-footer-row>
+
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5,10,25,50]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+
+  </div>
 </div>

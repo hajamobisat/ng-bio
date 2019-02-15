@@ -74,8 +74,10 @@ export class NomatUserComponent implements OnInit {
   }
 
   onDelete(id){
-    this.resettingForm();
-    this.nomatUserService.onDelete(id);
+
+    // code for delete user
+    // this.resettingForm();
+    // this.nomatUserService.onDelete(id);
 
   }
 

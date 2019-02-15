@@ -30,6 +30,10 @@ import { MatNavBarComponent } from './mat-nav-bar/mat-nav-bar.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { NomatUserComponent } from './nomat-user/nomat-user.component';
 import { NomatUserService } from './shared/nomat-user.service';
+import { DatatableService } from './shared/datatable.service';
+import { PrintLayoutComponent } from './print-layout/print-layout.component';
+import { TaPrintComponent } from './ta-print/ta-print.component';
+
 
 
 @NgModule({
@@ -42,7 +46,10 @@ import { NomatUserService } from './shared/nomat-user.service';
     UsersComponent,
     MatNavBarComponent,
     UserListComponent,
-    NomatUserComponent
+    NomatUserComponent,
+    PrintLayoutComponent,
+    TaPrintComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -52,14 +59,26 @@ import { NomatUserService } from './shared/nomat-user.service';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    
+
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
 
     RouterModule.forRoot([
-      { path: 'home', component: HomeComponent },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+
+      {
+        path: 'print',
+        outlet: 'print',
+        component: PrintLayoutComponent,
+        children: [
+          { path: 'documentName/documentData', component: TaPrintComponent }
+        ]
+      },
       // { path: 'home', component: HomeComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
       // { path: 'setting', component: SettingComponent },
       // { path: 'users', component: UsersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] }
@@ -68,7 +87,7 @@ import { NomatUserService } from './shared/nomat-user.service';
 
     ])
   ],
-  providers: [AuthService, AuthGuardService, AdminAuthGuardService, UserService, NotificationService, NomatUserService],
+  providers: [DatatableService, AuthService, AuthGuardService, AdminAuthGuardService, UserService, NotificationService, NomatUserService],
   bootstrap: [AppComponent],
   entryComponents: [UsersComponent],
 })

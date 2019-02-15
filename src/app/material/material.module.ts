@@ -4,10 +4,10 @@ import * as Material from '@angular/material';
 
 
 
-
 @NgModule({
   imports: [
     CommonModule,
+    Material.MatSelectModule,
     Material.MatCheckboxModule,
     Material.MatToolbarModule,
     Material.MatFormFieldModule,
@@ -29,11 +29,13 @@ import * as Material from '@angular/material';
     Material.MatRadioModule,
     Material.MatCheckboxModule,
     Material.MatCardModule,
-    Material.MatDividerModule
+    Material.MatDividerModule,
+    Material.MatTooltipModule
 
   ],
 
   exports:[
+    Material.MatSelectModule,
     Material.MatCheckboxModule,
     Material.MatToolbarModule,
     Material.MatFormFieldModule,
@@ -55,7 +57,8 @@ import * as Material from '@angular/material';
     Material.MatRadioModule,
     Material.MatCheckboxModule,
     Material.MatCardModule,
-    Material.MatDividerModule
+    Material.MatDividerModule,
+    Material.MatTooltipModule
   ],
 
   declarations: []
